@@ -7,10 +7,11 @@ namespace bobs_burger_api.Endpoints
     {
         public static void ConfigureIngredientEndpoint(this WebApplication app)
         {
-            var products = app.MapGroup("ingredients");
+            var ingredients = app.MapGroup("ingredients");
 
-            products.MapGet("", GetAllIngredients);
-            products.MapGet("/{id}", GetIngredientById);
+            ingredients.MapGet("", GetAllIngredients);
+            ingredients.MapGet("/{id}", GetIngredientById);
+            ingredients.MapGet("/{category}", GetIngredientsByCategory);
         }
 
         public static async Task<IResult> GetAllIngredients(IRepository<Ingredient> repository)
@@ -26,6 +27,17 @@ namespace bobs_burger_api.Endpoints
                 return TypedResults.NotFound($"Ingredient with id {id} not found");
             }
             return TypedResults.Ok(ingredient);
+        }
+
+        public static async Task<IResult> GetIngredientsByCategory(IRepository<Ingredient> repository, string category)
+        {
+            if (category != "burger")
+            {
+                return TypedResults.BadRequest($"Category must be burger");
+            }
+
+            var ingredients = await repository.GetAll();
+            return TypedResults.Ok(ingredients.Where(ingredient => ingredient.Category == category));
         }
     }
 }

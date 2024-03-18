@@ -37,7 +37,7 @@ namespace bobs_burger_api.Endpoints
             {
                 return TypedResults.BadRequest("Category must be provided");
             }
-            if (category != "burger" && category != "drink")
+            if (category != "burger" && category != "drink" && category != "sides")
             {
                 return TypedResults.BadRequest("Category must be either burger or drink");
             }
@@ -46,14 +46,18 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(products);
         }
 
-        public static async Task<IResult> GetIngredientsByProductId(IRepository<Product> repository, int id)
+        public static async Task<IResult> GetIngredientsByProductId(IRepository<Product> productRepository, IRepository<Ingredient> ingredientRepository, int id)
         {
-            var product = await repository.Get(id);
+            var product = await productRepository.Get(id);
             if (product == null)
             {
                 return TypedResults.NotFound($"Product with id {id} not found");
             }
-            return TypedResults.Ok(product.Ingredients);
+
+            var ingredients = await ingredientRepository.GetAll();
+            var result = ingredients.Where(ingredient => product.Ingredients.Contains(ingredient.Id));
+
+            return TypedResults.Ok(result);
         }
     }
 }

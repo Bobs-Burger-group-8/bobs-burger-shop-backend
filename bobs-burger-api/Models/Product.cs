@@ -20,6 +20,8 @@ namespace bobs_burger_api.Models
         public double Price { get; set; }
         [Column("ingredients")]
         public List<int> Ingredients { get; set; } = new List<int>();
+        [Column("image")]
+        public string Image { get; set; }
         [JsonIgnore]
         public List<Favourite> Favourites { get; set; }
     }
