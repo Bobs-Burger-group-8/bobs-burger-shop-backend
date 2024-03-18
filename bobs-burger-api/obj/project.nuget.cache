@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iKtqrDlYTyLwxNZADMz9xIHY9GoGsKlNaoB9AnugnAGkjyLuApghMgyKeHfHsQqSP0oGcEwxp/0C22dIZbwH5A==",
+  "dgSpecHash": "iX25PiWwpXIETbhVFbvHWMUTrLAclD2ITiyATvZB78hhxm59D0yxokPFeR3U0dGxIPQz7Da4N95ajTY0oEdkfg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop\\api\\bobs-burger-api\\bobs-burger-api.csproj",
+  "projectFilePath": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop-backend\\bobs-burger-api\\bobs-burger-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kverdu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Kverdu\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",

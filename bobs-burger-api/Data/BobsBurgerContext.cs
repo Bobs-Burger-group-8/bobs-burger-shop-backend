@@ -25,12 +25,33 @@ namespace bobs_burger_api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().HasKey(s => s.Id);
+            modelBuilder.Entity<Favourite>()
+                .HasOne(fave => fave.User)
+                .WithMany(user => user.Favourites)
+                .HasForeignKey(fave => fave.UserId);
+
+            modelBuilder.Entity<Favourite>()
+                .HasOne(fave => fave.Product)
+                .WithMany(product => product.Favourites)
+                .HasForeignKey(fave => fave.ProductId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(order => order.User)
+                .WithMany(user => user.Orders)
+                .HasForeignKey(order => order.UserId);
 
             BurgerData burgerData = new BurgerData();
             modelBuilder.Entity<Product>().HasData(burgerData.Products);
+            modelBuilder.Entity<Ingredient>().HasData(burgerData.Ingredients);
+            modelBuilder.Entity<User>().HasData(burgerData.Users);
+            modelBuilder.Entity<Favourite>().HasData(burgerData.Favourites);
+            modelBuilder.Entity<Order>().HasData(burgerData.Orders);
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Ingredient> Users { get; set; }
+        public DbSet<Ingredient> Favourites { get; set; }
+        public DbSet<Ingredient> Orders { get; set; }
     }
 }

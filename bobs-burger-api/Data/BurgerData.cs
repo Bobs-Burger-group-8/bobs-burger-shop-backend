@@ -5,87 +5,82 @@ namespace bobs_burger_api.Data
     public class BurgerData
     {
         private List<Product> _products = new List<Product>();
+        private List<Ingredient> _ingredients = new List<Ingredient>();
+        private List<User> _users = new List<User>();
+        private List<Favourite> _favourites = new List<Favourite>();
+        private List<Order> _orders = new List<Order>();
 
         private void AddIngredients()
         {
-            Product cheese = new Product();
+            Ingredient cheese = new Ingredient();
             cheese.Id = 1;
-            cheese.Category = "ingredient";
+            cheese.Category = "burger";
             cheese.Price = 1;
             cheese.Name = "cheese";
-            cheese.Description = "Deliciously melted cheese";
 
-            Product buns = new Product();
+            Ingredient buns = new Ingredient();
             buns.Id = 2;
-            buns.Category = "ingredient";
+            buns.Category = "burger";
             buns.Price = 1;
             buns.Name = "bun";
-            buns.Description = "No better buns exist";
 
-            Product lettuce = new Product();
+            Ingredient lettuce = new Ingredient();
             lettuce.Id = 3;
-            lettuce.Category = "ingredient";
+            lettuce.Category = "burger";
             lettuce.Price = 1;
             lettuce.Name = "lettuce";
-            lettuce.Description = "Very green";
 
-            Product bobsSecretSauce = new Product();
+            Ingredient bobsSecretSauce = new Ingredient();
             bobsSecretSauce.Id = 4;
-            bobsSecretSauce.Category = "ingredient";
+            bobsSecretSauce.Category = "burger";
             bobsSecretSauce.Price = 2;
             bobsSecretSauce.Name = "bobs-secret-sauce";
-            bobsSecretSauce.Description = "Bobs super special, super secret burger sauce";
 
-            Product beefPatty = new Product();
+            Ingredient beefPatty = new Ingredient();
             beefPatty.Id = 5;
-            beefPatty.Category = "ingredient";
+            beefPatty.Category = "burger";
             beefPatty.Price = 1;
             beefPatty.Name = "beef-patty";
-            beefPatty.Description = "100% juicy meat";
 
-            Product pickles = new Product();
+            Ingredient pickles = new Ingredient();
             pickles.Id = 6;
-            pickles.Category = "ingredient";
+            pickles.Category = "burger";
             pickles.Price = 1;
             pickles.Name = "pickle";
-            pickles.Description = "Fermented for days";
 
-            Product onions = new Product();
+            Ingredient onions = new Ingredient();
             onions.Id = 7;
-            onions.Category = "ingredient";
+            onions.Category = "burger";
             onions.Price = 1;
             onions.Name = "onion";
-            onions.Description = "Could make you cry";
 
-            Product ketchup = new Product();
+            Ingredient ketchup = new Ingredient();
             ketchup.Id = 8;
-            ketchup.Category = "ingredient";
+            ketchup.Category = "burger";
             ketchup.Price = 1;
             ketchup.Name = "ketchup";
-            ketchup.Description = "Very red";
 
-            Product mustard = new Product();
+            Ingredient mustard = new Ingredient();
             mustard.Id = 9;
-            mustard.Category = "ingredient";
+            mustard.Category = "burger";
             mustard.Price = 1;
             mustard.Name = "mustard";
-            mustard.Description = "Very yellow";
 
-            _products.Add(cheese);
-            _products.Add(buns);
-            _products.Add(lettuce);
-            _products.Add(bobsSecretSauce);
-            _products.Add(beefPatty);
-            _products.Add(pickles);
-            _products.Add(onions);
-            _products.Add(ketchup);
-            _products.Add(mustard);
+            _ingredients.Add(cheese);
+            _ingredients.Add(buns);
+            _ingredients.Add(lettuce);
+            _ingredients.Add(bobsSecretSauce);
+            _ingredients.Add(beefPatty);
+            _ingredients.Add(pickles);
+            _ingredients.Add(onions);
+            _ingredients.Add(ketchup);
+            _ingredients.Add(mustard);
         }
 
         private void AddBurgers()
         {
             Product bigBob = new Product();
-            bigBob.Id = 10;
+            bigBob.Id = 1;
             bigBob.Category = "burger";
             bigBob.Price = 9.99;
             bigBob.Name = "Big Bob";
@@ -93,7 +88,7 @@ namespace bobs_burger_api.Data
             bigBob.Ingredients = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
 
             Product quarterBob = new Product();
-            quarterBob.Id = 11;
+            quarterBob.Id = 2;
             quarterBob.Category = "burger";
             quarterBob.Price = 9.99;
             quarterBob.Name = "Quarter Bob";
@@ -104,16 +99,56 @@ namespace bobs_burger_api.Data
             _products.Add(quarterBob);
         }
 
+        private void AddUsers()
+        {
+            User bob = new User();
+            bob.Id = 1;
+            bob.FirstName = "Bob";
+            bob.LastName = "Burgerman";
+            bob.Email = "bob@burger.com";
+            bob.Phone = "12345678";
+            bob.Street = "Burger Street 2";
+            bob.City = "Burger Town";
+
+            _users.Add(bob);
+        }
+
+        private void AddFavourites()
+        {
+            Favourite fav = new Favourite();
+            fav.Id = 1;
+            fav.UserId = 1;
+            fav.ProductId = 1;
+
+            _favourites.Add(fav);
+        }
+
+        private void AddOrders()
+        {
+            Order order = new Order();
+            order.Id = 1;
+            order.UserId = 1;
+            order.DateTime = DateTime.UtcNow;
+            order.Completed = true;
+            order.ProductIds = [1, 1];
+            order.Total = 20;
+
+            _orders.Add(order);
+        }
+
         public BurgerData() 
         {
             AddIngredients();
             AddBurgers();
-            foreach(var burg in  _products)
-            {
-                Console.WriteLine(burg.Id);
-            }
+            AddUsers();
+            AddFavourites();
+            AddOrders();
         }
 
         public List<Product> Products { get => _products; }
+        public List<Ingredient> Ingredients { get => _ingredients; }
+        public List<User> Users { get => _users; }
+        public List<Favourite> Favourites { get => _favourites; }
+        public List<Order> Orders { get => _orders; }
     }
 }

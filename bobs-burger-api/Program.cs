@@ -9,6 +9,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<BobsBurgerContext>();
 builder.Services.AddScoped<IRepository<Product>, Repository<Product>>();
+builder.Services.AddScoped<IRepository<Ingredient>, Repository<Ingredient>>();
+builder.Services.AddScoped<IRepository<Order>, Repository<Order>>();
+builder.Services.AddScoped<IRepository<Favourite>, Repository<Favourite>>();
+builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,4 +24,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.ConfigureProductEndpoint();
+app.ConfigureIngredientEndpoint();
+app.ConfigureUserEndpoint();
+app.ConfigureOrderEndpoint();
+app.ConfigureFavouriteEndpoint();
 app.Run();

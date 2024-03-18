@@ -2750,11 +2750,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop\\api\\bobs-burger-api\\bobs-burger-api.csproj",
+      "projectUniqueName": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop-backend\\bobs-burger-api\\bobs-burger-api.csproj",
       "projectName": "bobs-burger-api",
-      "projectPath": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop\\api\\bobs-burger-api\\bobs-burger-api.csproj",
+      "projectPath": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop-backend\\bobs-burger-api\\bobs-burger-api.csproj",
       "packagesPath": "C:\\Users\\Kverdu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop\\api\\bobs-burger-api\\obj\\",
+      "outputPath": "C:\\Users\\Kverdu\\Documents\\bobs-burger-shop-backend\\bobs-burger-api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kverdu\\AppData\\Roaming\\NuGet\\NuGet.Config",

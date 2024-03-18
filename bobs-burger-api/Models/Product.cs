@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace bobs_burger_api.Models
 {
+    [Table("products")]
     public class Product
     {
         [Key]
@@ -18,5 +20,7 @@ namespace bobs_burger_api.Models
         public double Price { get; set; }
         [Column("ingredients")]
         public List<int> Ingredients { get; set; } = new List<int>();
+        [JsonIgnore]
+        public List<Favourite> Favourites { get; set; }
     }
 }
