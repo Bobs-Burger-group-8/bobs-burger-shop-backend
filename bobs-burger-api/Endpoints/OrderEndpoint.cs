@@ -10,7 +10,7 @@ namespace bobs_burger_api.Endpoints
             var orders = app.MapGroup("orders");
 
             orders.MapGet("", GetAllOrders);
-            orders.MapPost("/{id}", AddOrder);
+            orders.MapPost("", AddOrder);
             orders.MapPut("/{id}", UpdateOrder);
         }
 

@@ -7,12 +7,12 @@ namespace bobs_burger_api.Endpoints
     {
         public static void ConfigureFavouriteEndpoint(this WebApplication app)
         {
-            var products = app.MapGroup("favourites");
+            var favourites = app.MapGroup("favourites");
 
-            products.MapGet("", GetAll);
-            products.MapGet("/user/{id}", GetByUserId);
-            products.MapPost("/{id}", AddFavourite);
-            products.MapDelete("/{id}", DeleteFavourite);
+            favourites.MapGet("", GetAll);
+            favourites.MapGet("/user/{id}", GetByUserId);
+            favourites.MapPost("/{id}", AddFavourite);
+            favourites.MapDelete("/{id}", DeleteFavourite);
         }
 
         public static async Task<IResult> GetAll(IRepository<Favourite> repository)

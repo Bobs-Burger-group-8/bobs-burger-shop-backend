@@ -7,12 +7,12 @@ namespace bobs_burger_api.Endpoints
     {
         public static void ConfigureUserEndpoint(this WebApplication app)
         {
-            var products = app.MapGroup("users");
+            var users = app.MapGroup("users");
 
-            products.MapGet("/{id}", GetUserById);
-            products.MapPost("/{id}", AddUser);
-            products.MapPut("/{id}", UpdateUser);
-            products.MapDelete("/{id}", DeleteUser);
+            users.MapGet("/{id}", GetUserById);
+            users.MapPost("/{id}", AddUser);
+            users.MapPut("/{id}", UpdateUser);
+            users.MapDelete("/{id}", DeleteUser);
         }
 
         public static async Task<IResult> GetUserById(IRepository<User> repository, int id)

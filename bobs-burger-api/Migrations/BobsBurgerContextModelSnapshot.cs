@@ -147,6 +147,20 @@ namespace bobs_burger_api.Migrations
                             Category = "burger",
                             Name = "mustard",
                             Price = 1.0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Category = "burger",
+                            Name = "bacon",
+                            Price = 2.0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Category = "burger",
+                            Name = "tomato",
+                            Price = 2.0
                         });
                 });
 
@@ -191,7 +205,7 @@ namespace bobs_burger_api.Migrations
                         {
                             Id = 1,
                             Completed = true,
-                            DateTime = new DateTime(2024, 3, 18, 12, 53, 28, 143, DateTimeKind.Utc).AddTicks(7332),
+                            DateTime = new DateTime(2024, 3, 18, 14, 10, 4, 761, DateTimeKind.Utc).AddTicks(1460),
                             ProductIds = new List<int> { 1, 1 },
                             Total = 20.0,
                             UserId = 1
@@ -217,6 +231,11 @@ namespace bobs_burger_api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("image");
+
                     b.Property<List<int>>("Ingredients")
                         .IsRequired()
                         .HasColumnType("integer[]")
@@ -241,6 +260,7 @@ namespace bobs_burger_api.Migrations
                             Id = 1,
                             Category = "burger",
                             Description = "Biggest bob there is",
+                            Image = "https://s7d1.scene7.com/is/image/mcdonalds/Header_BigMac_832x472:product-header-desktop?wid=830&hei=456&dpr=off",
                             Ingredients = new List<int> { 1, 2, 3, 4, 5, 6, 7 },
                             Name = "Big Bob",
                             Price = 9.9900000000000002
@@ -249,10 +269,111 @@ namespace bobs_burger_api.Migrations
                         {
                             Id = 2,
                             Category = "burger",
-                            Description = "Biggest bob there is",
+                            Description = "A quarter of a bob",
+                            Image = "https://s7d1.scene7.com/is/image/mcdonalds/DC_202201_0007-005_QuarterPounderwithCheese_832x472:product-header-desktop?wid=830&hei=458&dpr=off",
                             Ingredients = new List<int> { 1, 2, 4, 6, 7, 8, 9 },
                             Name = "Quarter Bob",
-                            Price = 9.9900000000000002
+                            Price = 6.9900000000000002
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Category = "burger",
+                            Description = "A delicious bob with bacon",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/5gmlysib/bacon-cheddar.png",
+                            Ingredients = new List<int> { 1, 2, 10, 5, 11, 7, 4 },
+                            Name = "Bacon Bob",
+                            Price = 8.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Category = "burger",
+                            Description = "A delicious bob that whobbs",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/mm3bavh3/whopper.png",
+                            Ingredients = new List<int> { 2, 5, 11, 7, 6, 4 },
+                            Name = "Whobber",
+                            Price = 8.9900000000000002
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Category = "burger",
+                            Description = "A delicious bob with chicken",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/iszprrh2/kingse52000307-02_bk_crispy_chicken_web_produktbilde_500x540px.png",
+                            Ingredients = new List<int> { 2, 12, 3, 4 },
+                            Name = "Chicken Bob",
+                            Price = 7.9900000000000002
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Category = "burger",
+                            Description = "A delicious bob with fish",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/vekb5nxb/fish-king.png",
+                            Ingredients = new List<int> { 2, 13, 3, 4 },
+                            Name = "Fishy Bob",
+                            Price = 6.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Category = "drink",
+                            Description = "Coca Cola",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/e5oifjqh/bk_kiosk_400x290_cocacola_m.png",
+                            Ingredients = new List<int>(),
+                            Name = "Coca Cola",
+                            Price = 3.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Category = "drink",
+                            Description = "Fanta",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/pr0bwbks/bk_kiosk_400x290_fanta_m.png",
+                            Ingredients = new List<int>(),
+                            Name = "Fanta",
+                            Price = 3.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Category = "drink",
+                            Description = "Sprite",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/05tfhl04/bk_kiosk_400x290_sprite_m.png",
+                            Ingredients = new List<int>(),
+                            Name = "Sprite",
+                            Price = 3.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Category = "drink",
+                            Description = "Water",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/snhee5on/bk_medium_1100x1024_telemark-naturell-kullsyre-1.png",
+                            Ingredients = new List<int>(),
+                            Name = "Water",
+                            Price = 3.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Category = "drink",
+                            Description = "Coffee",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/wwqpjvvl/kaffe-stor-400x290px.png",
+                            Ingredients = new List<int>(),
+                            Name = "Coffee",
+                            Price = 3.4900000000000002
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Category = "drink",
+                            Description = "Cappuccino",
+                            Image = "https://cdn-bk-no-ordering.azureedge.net/media/zohl0we4/cappuccino-stor-400x290px.png",
+                            Ingredients = new List<int>(),
+                            Name = "Cappuccino",
+                            Price = 3.4900000000000002
                         });
                 });
 
