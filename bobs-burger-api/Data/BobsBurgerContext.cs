@@ -47,11 +47,5 @@ namespace bobs_burger_api.Data
             modelBuilder.Entity<Favourite>().HasData(burgerData.Favourites);
             modelBuilder.Entity<Order>().HasData(burgerData.Orders);
         }
-
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Ingredient> Users { get; set; }
-        public DbSet<Ingredient> Favourites { get; set; }
-        public DbSet<Ingredient> Orders { get; set; }
     }
 }
