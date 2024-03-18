@@ -10,8 +10,8 @@ namespace bobs_burger_api.Endpoints
             var favourites = app.MapGroup("favourites");
 
             favourites.MapGet("", GetAll);
-            favourites.MapGet("/user/{id}", GetByUserId);
-            favourites.MapPost("/{id}", AddFavourite);
+            favourites.MapGet("/user/{userId}", GetByUserId);
+            favourites.MapPost("", AddFavourite);
             favourites.MapDelete("/{id}", DeleteFavourite);
         }
 
@@ -20,15 +20,15 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(await repository.GetAll());
         }
 
-        public static async Task<IResult> GetByUserId(IRepository<Favourite> favouriteRepository, IRepository<User> userRepository, int id)
+        public static async Task<IResult> GetByUserId(IRepository<Favourite> favouriteRepository, IRepository<User> userRepository, int userId)
         {
-            var user = await userRepository.Get(id);
+            var user = await userRepository.Get(userId);
             if (user == null)
             {
-                return TypedResults.NotFound($"User with id {id} not found");
+                return TypedResults.NotFound($"User with id {userId} not found");
             }
             var favourites = await favouriteRepository.GetAll();
-            return TypedResults.Ok(favourites.Where(fave => fave.UserId == id).ToList());
+            return TypedResults.Ok(favourites.Where(fave => fave.UserId == userId).ToList());
         }
 
         public static async Task<IResult> AddFavourite

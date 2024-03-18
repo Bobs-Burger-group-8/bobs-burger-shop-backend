@@ -10,8 +10,8 @@ namespace bobs_burger_api.Endpoints
             var users = app.MapGroup("users");
 
             users.MapGet("/{id}", GetUserById);
-            users.MapPost("/{id}", AddUser);
-            users.MapPut("/{id}", UpdateUser);
+            users.MapPost("", AddUser);
+            users.MapPut("", UpdateUser);
             users.MapDelete("/{id}", DeleteUser);
         }
 
