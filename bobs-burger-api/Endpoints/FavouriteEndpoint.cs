@@ -1,5 +1,6 @@
 ﻿using bobs_burger_api.Models;
 using bobs_burger_api.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace bobs_burger_api.Endpoints
 {
@@ -15,11 +16,14 @@ namespace bobs_burger_api.Endpoints
             favourites.MapDelete("/{id}", DeleteFavourite);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetAll(IRepository<Favourite> repository)
         {
             return TypedResults.Ok(await repository.GetAll());
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> GetByUserId(IRepository<Favourite> favouriteRepository, IRepository<User> userRepository, int userId)
         {
             var user = await userRepository.Get(userId);
@@ -31,6 +35,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(favourites.Where(fave => fave.UserId == userId).ToList());
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> AddFavourite
             (
             IRepository<Favourite> favouriteRepository, 
@@ -58,6 +64,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"{addedFavourite.Id}", addedFavourite);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> DeleteFavourite(IRepository<Favourite> repository, int id)
         {
             var deletedFavourite = await repository.Delete(id);
