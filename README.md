@@ -26,6 +26,16 @@ Create a new appsettings.json / appsettings.Development.json (see appsettings.Ex
   "AllowedHosts": "*",
   "ConnectionStrings": {
     "DefaultConnectionString": "Host=HOST Database=DATABASE; Username=USERNAME; Password=PASSWORD; "
+  },
+  "SiteSettings": {
+    "AdminEmail": "example@test.com",
+    "AdminPassword": "administrator"
+  },
+  "JwtTokenSettings": {
+    "ValidIssuer": "ExampleIssuer",
+    "ValidAudience": "ExampleAudience",
+    "SymmetricSecurityKey": "v89h3bh89vh9ve8hc89nv98nn899cnccn998ev80vi809jberh89b",
+    "JwtRegisteredClaimNamesSub": "rbveer3h535nn3n35nyny5umbbt"
   }
 }
 ```
