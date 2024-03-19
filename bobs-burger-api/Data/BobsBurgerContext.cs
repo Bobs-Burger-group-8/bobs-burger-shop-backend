@@ -4,11 +4,12 @@ using bobs_burger_api.Models.Ingredients;
 using bobs_burger_api.Models.Orders;
 using bobs_burger_api.Models.Products;
 using bobs_burger_api.Models.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace bobs_burger_api.Data
 {
-    public class BobsBurgerContext : DbContext
+    public class BobsBurgerContext : IdentityUserContext<ApplicationUser>
     {
         private string _connectionString;
         public BobsBurgerContext()
@@ -30,6 +31,8 @@ namespace bobs_burger_api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Favourite>()
                 .HasOne(fave => fave.User)
                 .WithMany(user => user.Favourites)

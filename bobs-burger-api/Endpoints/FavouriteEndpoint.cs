@@ -3,6 +3,7 @@ using bobs_burger_api.Models.Favourites;
 using bobs_burger_api.Models.Products;
 using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bobs_burger_api.Endpoints
