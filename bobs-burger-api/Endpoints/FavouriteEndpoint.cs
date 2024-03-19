@@ -21,7 +21,6 @@ namespace bobs_burger_api.Endpoints
             favourites.MapDelete("/{id}", DeleteFavourite);
         }
 
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetAll(IRepository<Favourite> repository)
         {
