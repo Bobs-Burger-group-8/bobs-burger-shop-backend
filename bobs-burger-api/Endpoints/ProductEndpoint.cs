@@ -1,5 +1,7 @@
-﻿using bobs_burger_api.Models;
+﻿using bobs_burger_api.Models.Ingredients;
+using bobs_burger_api.Models.Products;
 using bobs_burger_api.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace bobs_burger_api.Endpoints
 {
@@ -15,11 +17,14 @@ namespace bobs_burger_api.Endpoints
             products.MapGet("/{id}/ingredients", GetIngredientsByProductId);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetAllProducts(IRepository<Product> repository)
         {
             return TypedResults.Ok(await repository.GetAll());
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> GetProductById(IRepository<Product> repository, int id)
         {
             var product = await repository.Get(id);
@@ -30,6 +35,9 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(product);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> GetProductsByCategory(IRepository<Product> repository, string category)
         {
             Console.WriteLine(category);
@@ -46,6 +54,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(products);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> GetIngredientsByProductId(IRepository<Product> productRepository, IRepository<Ingredient> ingredientRepository, int id)
         {
             var product = await productRepository.Get(id);

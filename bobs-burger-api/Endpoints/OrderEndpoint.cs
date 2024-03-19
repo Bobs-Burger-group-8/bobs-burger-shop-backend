@@ -1,5 +1,8 @@
-﻿using bobs_burger_api.Models;
+﻿using bobs_burger_api.Models.Orders;
+using bobs_burger_api.Models.Products;
+using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace bobs_burger_api.Endpoints
 {
@@ -14,11 +17,14 @@ namespace bobs_burger_api.Endpoints
             orders.MapPut("/{id}", UpdateOrder);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetAllOrders(IRepository<Order> repository)
         {
             return TypedResults.Ok(await repository.GetAll());
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> AddOrder(IRepository<Order> orderRepository, IRepository<User> userRepository, IRepository<Product> productRepository, OrderPost order)
         {
             if (await userRepository.Get(order.UserId) == null)
@@ -45,6 +51,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"{addedOrder.Id}", addedOrder);
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> UpdateOrder(IRepository<Order> repository, int id, bool completed)
         {
             var order = await repository.Get(id);

@@ -1,5 +1,6 @@
-﻿using bobs_burger_api.Models;
+﻿using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace bobs_burger_api.Endpoints
 {
@@ -15,6 +16,7 @@ namespace bobs_burger_api.Endpoints
             users.MapDelete("/{id}", DeleteUser);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetUserById(IRepository<User> repository, int id)
         {
             var user = await repository.Get(id);
@@ -25,6 +27,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(user);
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public static async Task<IResult> AddUser(IRepository<User> repository, UserPost newUser)
         {
             if(string.IsNullOrEmpty(newUser.FirstName))
@@ -66,6 +70,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"/{addedUser.Id}", addedUser);
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> UpdateUser(IRepository<User> repository, User changedUser)
         {
             var user = repository.Get(changedUser.Id);
@@ -78,6 +84,8 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"/{updatedUser.Id}", updatedUser);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> DeleteUser(IRepository<User> repository, int id)
         {
             var deletedUser = await repository.Delete(id);

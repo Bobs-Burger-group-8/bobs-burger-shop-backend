@@ -1,6 +1,11 @@
 using bobs_burger_api.Data;
 using bobs_burger_api.Endpoints;
 using bobs_burger_api.Models;
+using bobs_burger_api.Models.Favourites;
+using bobs_burger_api.Models.Ingredients;
+using bobs_burger_api.Models.Orders;
+using bobs_burger_api.Models.Products;
+using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,9 @@
 ﻿using bobs_burger_api.Models;
+using bobs_burger_api.Models.Favourites;
+using bobs_burger_api.Models.Ingredients;
+using bobs_burger_api.Models.Orders;
+using bobs_burger_api.Models.Products;
+using bobs_burger_api.Models.Users;
 
 namespace bobs_burger_api.Data
 {
