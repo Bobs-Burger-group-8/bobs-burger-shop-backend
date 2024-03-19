@@ -48,6 +48,8 @@ namespace bobs_burger_api.Data
                 .WithMany(user => user.Orders)
                 .HasForeignKey(order => order.UserId);
 
+            
+
             BurgerData burgerData = new BurgerData();
             modelBuilder.Entity<Product>().HasData(burgerData.Products);
             modelBuilder.Entity<Ingredient>().HasData(burgerData.Ingredients);

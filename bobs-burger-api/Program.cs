@@ -6,16 +6,43 @@ using bobs_burger_api.Models.Orders;
 using bobs_burger_api.Models.Products;
 using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
+using bobs_burger_api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Test API", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 
 builder.Services.AddCors(options =>
 {
@@ -45,10 +72,9 @@ var validIssuer = builder.Configuration.GetValue<string>
 var validAudience = builder.Configuration.GetValue<string>
 ("JwtTokenSettings:ValidAudience");
 
-var symmetricSecurityKey =
-builder.Configuration.GetValue<string>
-("JwtTokenSettings:SymmetricSecurityKey");
+var symmetricSecurityKey = builder.Configuration.GetValue<string>("JwtTokenSettings:SymmetricSecurityKey");
 builder.Services.AddAuthorization();
+
 builder.Services.AddAuthentication(options =>
 {
 options.DefaultAuthenticateScheme =
@@ -83,6 +109,7 @@ builder.Services.AddScoped<IRepository<Ingredient>, Repository<Ingredient>>();
 builder.Services.AddScoped<IRepository<Order>, Repository<Order>>();
 builder.Services.AddScoped<IRepository<Favourite>, Repository<Favourite>>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<TokenService, TokenService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -98,6 +125,7 @@ app.ConfigureIngredientEndpoint();
 app.ConfigureUserEndpoint();
 app.ConfigureOrderEndpoint();
 app.ConfigureFavouriteEndpoint();
+app.ConfigureAuthEndpoints();
 app.UseCors("AllowLocalhost5173"); // Enable CORS middleware
 app.UseAuthentication();
 app.UseAuthorization();
