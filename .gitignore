@@ -136,4 +136,4 @@ dist
 */**/obj/Debug   
 */**/obj/Release   
 /bobs-burger-api/Migrations
-/.vs/
+/.vs
