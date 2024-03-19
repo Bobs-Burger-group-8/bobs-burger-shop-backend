@@ -56,6 +56,12 @@ namespace bobs_burger_api.Endpoints
                 return TypedResults.BadRequest("A city is required");
             }
 
+            var users = await repository.GetAll();
+            if (users.FirstOrDefault(user => user.Email == newUser.Email) != null)
+            {
+                return TypedResults.BadRequest($"User with email {newUser.Email} already exists");
+            }
+
             User user = new User
             {
                 FirstName = newUser.FirstName,
@@ -71,13 +77,20 @@ namespace bobs_burger_api.Endpoints
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> UpdateUser(IRepository<User> repository, User changedUser)
         {
-            var user = repository.Get(changedUser.Id);
+            var user = await repository.Get(changedUser.Id);
             if (user == null)
             {
                 return TypedResults.NotFound($"User with id {changedUser.Id} not found");
+            }
+
+            var users = await repository.GetAll();
+            if (users.FirstOrDefault(user => user.Email == changedUser.Email) != null)
+            {
+                return TypedResults.BadRequest($"User with email {changedUser.Email} already exists");
             }
 
             var updatedUser = await repository.Update(changedUser);
