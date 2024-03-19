@@ -12,7 +12,7 @@ namespace bobs_burger_api.Endpoints
 
             users.MapGet("/{id}", GetUserById);
             users.MapPost("", AddUser);
-            users.MapPut("", UpdateUser);
+            users.MapPut("/{id}", UpdateUser);
             users.MapDelete("/{id}", DeleteUser);
         }
 
@@ -79,7 +79,7 @@ namespace bobs_burger_api.Endpoints
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public static async Task<IResult> UpdateUser(IRepository<User> repository, User changedUser)
+        public static async Task<IResult> UpdateUser(IRepository<User> repository, int id, User changedUser)
         {
             var user = await repository.Get(changedUser.Id);
             if (user == null)
