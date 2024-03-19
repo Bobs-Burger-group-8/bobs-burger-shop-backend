@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace bobs_burger_api.Models
+namespace bobs_burger_api.Models.Ingredients
 {
     [Table("ingredients")]
     public class Ingredient

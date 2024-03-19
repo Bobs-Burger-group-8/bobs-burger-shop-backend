@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using bobs_burger_api.Models.Favourites;
+using bobs_burger_api.Models.Orders;
 
-namespace bobs_burger_api.Models
+namespace bobs_burger_api.Models.Users
 {
     [Table("users")]
     public class User

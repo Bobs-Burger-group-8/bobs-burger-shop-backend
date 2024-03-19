@@ -1,4 +1,4 @@
-﻿using bobs_burger_api.Models;
+﻿using bobs_burger_api.Models.Ingredients;
 using bobs_burger_api.Repository;
 using Microsoft.AspNetCore.Mvc;
 

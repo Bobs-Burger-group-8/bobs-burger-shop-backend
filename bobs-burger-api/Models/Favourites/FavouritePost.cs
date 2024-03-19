@@ -1,4 +1,4 @@
-﻿namespace bobs_burger_api.Models
+﻿namespace bobs_burger_api.Models.Favourites
 {
     public class FavouritePost
     {

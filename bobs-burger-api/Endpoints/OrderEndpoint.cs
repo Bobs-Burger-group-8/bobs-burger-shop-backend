@@ -1,4 +1,6 @@
-﻿using bobs_burger_api.Models;
+﻿using bobs_burger_api.Models.Orders;
+using bobs_burger_api.Models.Products;
+using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
 using Microsoft.AspNetCore.Mvc;
 

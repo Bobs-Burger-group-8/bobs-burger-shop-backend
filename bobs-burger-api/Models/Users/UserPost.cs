@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace bobs_burger_api.Models
+namespace bobs_burger_api.Models.Users
 {
     public class UserPost
     {
