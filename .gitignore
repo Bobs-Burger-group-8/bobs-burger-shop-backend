@@ -131,9 +131,7 @@ dist
 
 /bobs-burger-api/appsettings.json
 /bobs-burger-api/appsettings.Development.json
-*/**/bin/Debug   
-*/**/bin/Release   
-*/**/obj/Debug   
-*/**/obj/Release   
+*/**/obj/* 
+*/*.user
 /bobs-burger-api/Migrations
 /.vs/*
