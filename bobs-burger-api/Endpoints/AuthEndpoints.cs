@@ -38,6 +38,7 @@ namespace bobs_burger_api.Endpoints
                     LastName = registerPayload.LastName,
                     Street = registerPayload.Street,
                     City = registerPayload.City,
+                    PhoneNumber = registerPayload.Phone,
                     Role = UserRole.User
                 },
                 registerPayload.Password!);
