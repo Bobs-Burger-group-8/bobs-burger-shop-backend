@@ -78,7 +78,7 @@ namespace bobs_burger_api.Endpoints
             
             var token = tokenService.CreateToken(user);
             
-            return TypedResults.Ok(new AuthResponseDto(token, user.Email, user.Role));
+            return TypedResults.Ok(new AuthResponseDto(token, user.Email, user.Id, user.Role));
         }
     }
 }
