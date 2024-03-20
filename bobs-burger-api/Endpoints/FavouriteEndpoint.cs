@@ -37,7 +37,7 @@ namespace bobs_burger_api.Endpoints
                 return TypedResults.NotFound($"User with id {userId} not found");
             }
             var favourites = await favouriteRepository.GetAll();
-            return TypedResults.Ok(favourites.Where(fave => fave.UserId == userId).ToList());
+            return TypedResults.Ok(favourites.Where(fave => fave.UserId.Equals(userId)).ToList());
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -50,7 +50,7 @@ namespace bobs_burger_api.Endpoints
                 FavouritePost newFavourite
             )
         {
-            if (userRepository.Get(newFavourite.UserId) == null)
+          /*  if (userRepository.Get(newFavourite.UserId) == null)
             {
                 return TypedResults.NotFound($"User with id {newFavourite.UserId} was not found");
             }
@@ -58,7 +58,7 @@ namespace bobs_burger_api.Endpoints
             {
                 return TypedResults.NotFound($"Product with id {newFavourite.ProductId} was not found");
             }
-
+          */
             var favourite = new Favourite
             {
                 UserId = newFavourite.UserId,
