@@ -29,7 +29,7 @@ namespace bobs_burger_api.Endpoints
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public static async Task<IResult> GetByUserId(IRepository<Favourite> favouriteRepository, IRepository<User> userRepository, int userId)
+        public static async Task<IResult> GetByUserId(IRepository<Favourite> favouriteRepository, IRepository<ApplicationUser> userRepository, string userId)
         {
             var user = await userRepository.Get(userId);
             if (user == null)
@@ -44,10 +44,10 @@ namespace bobs_burger_api.Endpoints
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> AddFavourite
             (
-            IRepository<Favourite> favouriteRepository, 
-            IRepository<User> userRepository, 
-            IRepository<Product> productRepository, 
-            FavouritePost newFavourite
+                IRepository<Favourite> favouriteRepository, 
+                IRepository<ApplicationUser> userRepository, 
+                IRepository<Product> productRepository, 
+                FavouritePost newFavourite
             )
         {
             if (userRepository.Get(newFavourite.UserId) == null)

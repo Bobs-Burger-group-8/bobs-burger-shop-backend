@@ -11,9 +11,6 @@ namespace bobs_burger_api.Data
     {
         private List<Product> _products = new List<Product>();
         private List<Ingredient> _ingredients = new List<Ingredient>();
-        private List<User> _users = new List<User>();
-        private List<Favourite> _favourites = new List<Favourite>();
-        private List<Order> _orders = new List<Order>();
 
         private void AddIngredients()
         {
@@ -311,57 +308,14 @@ namespace bobs_burger_api.Data
             _products.Add(cappuccino);
         }
 
-        private void AddUsers()
-        {
-            User bob = new User();
-            bob.Id = 1;
-            bob.FirstName = "Bob";
-            bob.LastName = "Burgerman";
-            bob.Email = "bob@burger.com";
-            bob.Phone = "12345678";
-            bob.Street = "Burger Street 2";
-            bob.City = "Burger Town";
-
-            _users.Add(bob);
-        }
-
-        private void AddFavourites()
-        {
-            Favourite fav = new Favourite();
-            fav.Id = 1;
-            fav.UserId = 1;
-            fav.ProductId = 1;
-
-            _favourites.Add(fav);
-        }
-
-        private void AddOrders()
-        {
-            Order order = new Order();
-            order.Id = 1;
-            order.UserId = 1;
-            order.DateTime = DateTime.UtcNow;
-            order.Completed = true;
-            order.ProductIds = [1, 1];
-            order.Total = 20;
-
-            _orders.Add(order);
-        }
-
         public BurgerData() 
         {
             AddIngredients();
             AddBurgers();
             AddDrinks();
-            AddUsers();
-            AddFavourites();
-            AddOrders();
         }
 
         public List<Product> Products { get => _products; }
         public List<Ingredient> Ingredients { get => _ingredients; }
-        public List<User> Users { get => _users; }
-        public List<Favourite> Favourites { get => _favourites; }
-        public List<Order> Orders { get => _orders; }
     }
 }

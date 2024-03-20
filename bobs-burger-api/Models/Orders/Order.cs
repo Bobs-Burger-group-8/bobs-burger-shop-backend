@@ -12,9 +12,9 @@ namespace bobs_burger_api.Models.Orders
         [Column("id")]
         public int Id { get; set; }
         [Column("user_id")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [JsonIgnore]
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         [Column("products")]
         public List<int> ProductIds { get; set; }
         [Column("total")]

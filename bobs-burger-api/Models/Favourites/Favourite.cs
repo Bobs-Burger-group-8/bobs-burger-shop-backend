@@ -13,9 +13,9 @@ namespace bobs_burger_api.Models.Favourites
         [Column("id")]
         public int Id { get; set; }
         [Column("user_id")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [JsonIgnore]
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         [Column("product_id")]
         public int ProductId { get; set; }
         [JsonIgnore]

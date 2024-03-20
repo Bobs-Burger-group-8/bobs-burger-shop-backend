@@ -11,102 +11,90 @@ namespace bobs_burger_api.Endpoints
             var users = app.MapGroup("users");
 
             users.MapGet("/{id}", GetUserById);
-            users.MapPost("", AddUser);
             users.MapPut("/{id}", UpdateUser);
             users.MapDelete("/{id}", DeleteUser);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public static async Task<IResult> GetUserById(IRepository<User> repository, int id)
+        public static async Task<IResult> GetUserById(IRepository<ApplicationUser> repository, string id)
         {
             var user = await repository.Get(id);
             if (user == null)
             {
                 return TypedResults.NotFound($"User with id {id} not found");
             }
-            return TypedResults.Ok(user);
-        }
-
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public static async Task<IResult> AddUser(IRepository<User> repository, UserPost newUser)
-        {
-            if(string.IsNullOrEmpty(newUser.FirstName))
+            UserResponse response = new UserResponse
             {
-                return TypedResults.BadRequest("A first name is required");
-            }
-            if (string.IsNullOrEmpty(newUser.LastName))
-            {
-                return TypedResults.BadRequest("A last name is required");
-            }
-            if (string.IsNullOrEmpty(newUser.Email))
-            {
-                return TypedResults.BadRequest("A email is required");
-            }
-            if (string.IsNullOrEmpty(newUser.Phone))
-            {
-                return TypedResults.BadRequest("A phone number is required");
-            }
-            if (string.IsNullOrEmpty(newUser.Street))
-            {
-                return TypedResults.BadRequest("A street is required");
-            }
-            if (string.IsNullOrEmpty(newUser.City))
-            {
-                return TypedResults.BadRequest("A city is required");
-            }
-
-            var users = await repository.GetAll();
-            if (users.FirstOrDefault(user => user.Email == newUser.Email) != null)
-            {
-                return TypedResults.BadRequest($"User with email {newUser.Email} already exists");
-            }
-
-            User user = new User
-            {
-                FirstName = newUser.FirstName,
-                LastName = newUser.LastName,
-                Email = newUser.Email,
-                Phone = newUser.Phone,
-                Street = newUser.Street,
-                City = newUser.City
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.PhoneNumber,
+                Street = user.Street,
+                City = user.City,
             };
-
-            var addedUser = await repository.Add(user);
-            return TypedResults.Created($"/{addedUser.Id}", addedUser);
+            return TypedResults.Ok(response);
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public static async Task<IResult> UpdateUser(IRepository<User> repository, int id, User changedUser)
+        public static async Task<IResult> UpdateUser(IRepository<ApplicationUser> repository, string id, UserPost changedUser)
         {
-            var user = await repository.Get(changedUser.Id);
+            var user = await repository.Get(id);
             if (user == null)
             {
-                return TypedResults.NotFound($"User with id {changedUser.Id} not found");
+                return TypedResults.NotFound($"User with id {id} not found");
             }
 
             var users = await repository.GetAll();
-            if (users.FirstOrDefault(user => user.Email == changedUser.Email) != null)
+
+            if (users.FirstOrDefault(u => u.Email == changedUser.Email && u.Id != user.Id) != null)
             {
-                return TypedResults.BadRequest($"User with email {changedUser.Email} already exists");
+                return TypedResults.BadRequest($"User with email {changedUser.Email} already exists!");
             }
 
-            var updatedUser = await repository.Update(changedUser);
-            return TypedResults.Created($"/{updatedUser.Id}", updatedUser);
+            user.City = changedUser.City;
+            user.Street = changedUser.Street;
+            user.FirstName = changedUser.FirstName;
+            user.LastName = changedUser.LastName;
+            user.Email = changedUser.Email;
+            user.PhoneNumber = changedUser.Phone;
+
+            var updatedUser = await repository.Update(user);
+            UserResponse response = new UserResponse
+            {
+                Id = updatedUser.Id,
+                FirstName = updatedUser.FirstName,
+                LastName = updatedUser.LastName,
+                Email = updatedUser.Email,
+                Phone = updatedUser.PhoneNumber,
+                Street = updatedUser.Street,
+                City = updatedUser.City,
+            };
+            return TypedResults.Created($"/{updatedUser.Id}", response);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public static async Task<IResult> DeleteUser(IRepository<User> repository, int id)
+        public static async Task<IResult> DeleteUser(IRepository<ApplicationUser> repository, string id)
         {
             var deletedUser = await repository.Delete(id);
             if (deletedUser == null)
             {
                 return TypedResults.NotFound($"User with id {id} not found");
             }
-            return TypedResults.Ok(deletedUser);
+            UserResponse response = new UserResponse
+            {
+                Id = deletedUser.Id,
+                FirstName = deletedUser.FirstName,
+                LastName = deletedUser.LastName,
+                Email = deletedUser.Email,
+                Phone = deletedUser.PhoneNumber,
+                Street = deletedUser.Street,
+                City = deletedUser.City,
+            };
+            return TypedResults.Ok(response);
         }
     }
 }

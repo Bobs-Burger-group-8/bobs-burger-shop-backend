@@ -25,7 +25,7 @@ namespace bobs_burger_api.Endpoints
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public static async Task<IResult> AddOrder(IRepository<Order> orderRepository, IRepository<User> userRepository, IRepository<Product> productRepository, OrderPost order)
+        public static async Task<IResult> AddOrder(IRepository<Order> orderRepository, IRepository<ApplicationUser> userRepository, IRepository<Product> productRepository, OrderPost order)
         {
             if (await userRepository.Get(order.UserId) == null)
             {

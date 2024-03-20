@@ -26,16 +26,15 @@ namespace bobs_burger_api.Services
             return tokenHandler.WriteToken(token);
         }
 
-        private JwtSecurityToken CreateJwtToken(List<Claim> claims, SigningCredentials credentials, DateTime expiration) =>
-            new(
-                new ConfigurationBuilder().AddJsonFile("appsettings.json").Build()
+        private JwtSecurityToken CreateJwtToken(List<Claim> claims, SigningCredentials credentials, DateTime expiration) => 
+            new(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build()
                 .GetSection("JwtTokenSettings")["ValidIssuer"],
                 new ConfigurationBuilder().AddJsonFile("appsettings.json").Build()
                 .GetSection("JwtTokenSettings")["ValidAudience"],
                 claims,
                 expires: expiration,
                 signingCredentials: credentials
-                );
+            );
 
         private List<Claim> CreateClaims(ApplicationUser user)
         {

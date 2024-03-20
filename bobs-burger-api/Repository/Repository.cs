@@ -18,6 +18,11 @@ namespace bobs_burger_api.Repository
             return await _dbSet.ToListAsync();
         }
 
+        public async Task<T?> Get(string id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
         public async Task<T?> Get(int id)
         {
             return await _dbSet.FindAsync(id);
@@ -42,6 +47,17 @@ namespace bobs_burger_api.Repository
         {
             T? entity = await _dbSet.FindAsync(id);
             if (entity == null) { 
+                return null;
+            }
+            _dbSet.Remove(entity);
+            await _db.SaveChangesAsync();
+            return entity;
+        }
+        public async Task<T?> Delete(string id)
+        {
+            T? entity = await _dbSet.FindAsync(id);
+            if (entity == null)
+            {
                 return null;
             }
             _dbSet.Remove(entity);
