@@ -59,6 +59,9 @@ namespace bobs_burger_api.Endpoints
             user.FirstName = changedUser.FirstName;
             user.LastName = changedUser.LastName;
             user.Email = changedUser.Email;
+            user.NormalizedEmail = changedUser.Email.ToUpper();
+            user.UserName = changedUser.Email;
+            user.NormalizedUserName = changedUser.Email.ToUpper();
             user.PhoneNumber = changedUser.Phone;
 
             var updatedUser = await repository.Update(user);
