@@ -57,14 +57,20 @@ namespace bobs_burger_api.Endpoints
         [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public static async Task<IResult> UpdateOrder(IRepository<Order> repository, int id, bool completed)
+        public static async Task<IResult> UpdateOrder(IRepository<Order> repository, int id, string completed)
         {
             var order = await repository.Get(id);
             if (order == null)
             {
                 return TypedResults.NotFound($"Order with id {id} not found");
             }
-            order.Completed = completed;
+            if (completed == "true")
+            {
+                order.Completed = true;
+            } else
+            {
+                order.Completed = false;
+            }
             var updatedOrder = await repository.Update(order);
             return TypedResults.Created($"{updatedOrder.Id}", updatedOrder);
         }

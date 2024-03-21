@@ -39,13 +39,13 @@ namespace bobs_burger_api.Endpoints
                     Street = registerPayload.Street,
                     City = registerPayload.City,
                     PhoneNumber = registerPayload.Phone,
-                    Role = UserRole.User
+                    Role = registerPayload.Role,
                 },
                 registerPayload.Password!);
 
             if (result.Succeeded)
             {
-                return TypedResults.Created($"/auth/", new RegisterResponseDto(registerPayload.Email, UserRole.User));
+                return TypedResults.Created($"/auth/", new RegisterResponseDto(registerPayload.Email, registerPayload.Role));
             }
 
             return Results.BadRequest(result.Errors);
