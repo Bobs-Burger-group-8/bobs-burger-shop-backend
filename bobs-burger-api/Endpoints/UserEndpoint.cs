@@ -1,5 +1,6 @@
 ﻿using bobs_burger_api.Models.Users;
 using bobs_burger_api.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bobs_burger_api.Endpoints
@@ -15,6 +16,7 @@ namespace bobs_burger_api.Endpoints
             users.MapDelete("/{id}", DeleteUser);
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetUserById(IRepository<ApplicationUser> repository, string id)
         {
@@ -36,6 +38,7 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(response);
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -78,6 +81,7 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"/{updatedUser.Id}", response);
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> DeleteUser(IRepository<ApplicationUser> repository, string id)

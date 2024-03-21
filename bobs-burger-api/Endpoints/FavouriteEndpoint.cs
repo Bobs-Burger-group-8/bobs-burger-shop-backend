@@ -21,12 +21,14 @@ namespace bobs_burger_api.Endpoints
             favourites.MapDelete("/{id}", DeleteFavourite);
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetAll(IRepository<Favourite> repository)
         {
             return TypedResults.Ok(await repository.GetAll());
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> GetByUserId(IRepository<Favourite> favouriteRepository, IRepository<ApplicationUser> userRepository, string userId)
@@ -40,6 +42,7 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Ok(favourites.Where(fave => fave.UserId.Equals(userId)).ToList());
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> AddFavourite
@@ -69,6 +72,7 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"{addedFavourite.Id}", addedFavourite);
         }
 
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> DeleteFavourite(IRepository<Favourite> repository, int id)
