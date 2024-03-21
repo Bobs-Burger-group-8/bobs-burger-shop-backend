@@ -107,6 +107,7 @@ builder.Services.AddDbContext<BobsBurgerContext>();
 builder.Services.AddScoped<IRepository<Product>, Repository<Product>>();
 builder.Services.AddScoped<IRepository<Ingredient>, Repository<Ingredient>>();
 builder.Services.AddScoped<IRepository<Order>, Repository<Order>>();
+builder.Services.AddScoped<IRepository<OrderProduct>, Repository<OrderProduct>>();
 builder.Services.AddScoped<IRepository<Favourite>, Repository<Favourite>>();
 builder.Services.AddScoped<IRepository<ApplicationUser>, Repository<ApplicationUser>>();
 builder.Services.AddScoped<TokenService, TokenService>();

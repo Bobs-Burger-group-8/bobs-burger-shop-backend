@@ -27,26 +27,26 @@ namespace bobs_burger_api.Endpoints
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> AddOrder(IRepository<Order> orderRepository, IRepository<ApplicationUser> userRepository, IRepository<Product> productRepository, OrderPost order)
         {
-            if (await userRepository.Get(order.UserId) == null)
+            List<OrderProduct> products = new List<OrderProduct>();
+            foreach (var product in order.Products)
             {
-                return TypedResults.NotFound($"User with id {order.UserId} not found");
-            }
-            var products = await productRepository.GetAll();
-            foreach (var product in order.ProductIds)
-            {
-                if (products.FirstOrDefault(prod => prod.Id == product) == null)
+                OrderProduct orderProduct = new OrderProduct
                 {
-                    return TypedResults.NotFound($"Product with id {product} not found");
-                }
+                    ProductId = product.ProductId,
+                    Quantity = product.Quantity,
+                };
+                products.Add(orderProduct);
+
             }
             Order newOrder = new Order
             {
                 UserId = order.UserId,
-                ProductIds = order.ProductIds,
+                Products = products,
                 Total = order.Total,
                 DateTime = DateTime.UtcNow,
                 Completed = false
             };
+
             var addedOrder = await orderRepository.Add(newOrder);
             return TypedResults.Created($"{addedOrder.Id}", addedOrder);
         }

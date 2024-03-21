@@ -16,7 +16,7 @@ namespace bobs_burger_api.Models.Orders
         [JsonIgnore]
         public ApplicationUser User { get; set; }
         [Column("products")]
-        public List<int> ProductIds { get; set; }
+        public List<OrderProduct> Products { get; set; }
         [Column("total")]
         public double Total { get; set; }
         [Column("order_time")]
