@@ -25,7 +25,7 @@ Create a new appsettings.json / appsettings.Development.json (see appsettings.Ex
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnectionString": "Host=HOST Database=DATABASE; Username=USERNAME; Password=PASSWORD; "
+    "DefaultConnectionString": "Host=HOST; Database=DATABASE; Username=USERNAME; Password=PASSWORD; "
   },
   "SiteSettings": {
     "AdminEmail": "example@test.com",
@@ -39,3 +39,7 @@ Create a new appsettings.json / appsettings.Development.json (see appsettings.Ex
   }
 }
 ```
+
+## Entity Relation Diagram
+
+The ERD can be found in the Bobs-Burgers-ERD.png file or here: <https://whimsical.com/bobs-burgers-EdCdhPHw1uZuvRn8Vyi3TF>
