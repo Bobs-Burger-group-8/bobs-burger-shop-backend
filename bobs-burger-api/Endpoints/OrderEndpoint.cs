@@ -39,7 +39,6 @@ namespace bobs_burger_api.Endpoints
                     Quantity = product.Quantity,
                 };
                 products.Add(orderProduct);
-
             }
             Order newOrder = new Order
             {
@@ -54,7 +53,7 @@ namespace bobs_burger_api.Endpoints
             return TypedResults.Created($"{addedOrder.Id}", addedOrder);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public static async Task<IResult> UpdateOrder(IRepository<Order> repository, int id, string completed)
